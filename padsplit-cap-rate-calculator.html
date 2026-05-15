@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PadSplit Cap Rate Calculator — CapStar Real Estate</title>
+  <style>
+    :root {
+      --navy: #0a1f44;
+      --navy-light: #132a5e;
+      --navy-dark: #061530;
+      --gold: #c9a84c;
+      --gold-light: #e4c26e;
+      --gold-dark: #a8882e;
+      --white: #ffffff;
+      --off-white: #f8f6f1;
+      --gray-100: #f3f4f6;
+      --gray-200: #e5e7eb;
+      --gray-400: #9ca3af;
+      --gray-600: #4b5563;
+      --gray-800: #1f2937;
+      --red: #dc2626;
+      --red-bg: #fef2f2;
+      --yellow: #d97706;
+      --yellow-bg: #fffbeb;
+      --green: #16a34a;
+      --green-bg: #f0fdf4;
+      --radius: 12px;
+      --shadow: 0 4px 24px rgba(10,31,68,0.10);
+      --shadow-sm: 0 2px 8px rgba(10,31,68,0.07);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      background: var(--off-white);
+      color: var(--gray-800);
+      min-height: 100vh;
+    }
+
+    /* ── Header ── */
+    header {
+      background: linear-gradient(135deg, var(--navy-dark) 0%, var(--navy) 60%, var(--navy-light) 100%);
+      color: var(--white);
+      padding: 28px 24px 24px;
+      text-align: center;
+      border-bottom: 4px solid var(--gold);
+    }
+    header .brand {
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 6px;
+    }
+    header h1 {
+      font-size: clamp(22px, 5vw, 32px);
+      font-weight: 700;
+      letter-spacing: -0.5px;
+    }
+    header p {
+      margin-top: 6px;
+      font-size: 14px;
+      color: rgba(255,255,255,0.65);
+    }
+
+    /* ── Layout ── */
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 32px 20px 60px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+    }
+    @media (max-width: 768px) {
+      .grid { grid-template-columns: 1fr; }
+    }
+
+    /* ── Cards ── */
+    .card {
+      background: var(--white);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+    .card-header {
+      background: var(--navy);
+      color: var(--white);
+      padding: 14px 20px;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .card-header .icon {
+      width: 22px;
+      height: 22px;
+      background: var(--gold);
+      border-radius: 6px;
+      display: grid;
+      place-items: center;
+      font-size: 12px;
+      flex-shrink: 0;
+    }
+    .card-body { padding: 20px; }
+
+    /* ── Form fields ── */
+    .field {
+      margin-bottom: 16px;
+    }
+    .field:last-child { margin-bottom: 0; }
+
+    label {
+      display: block;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--gray-600);
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+
+    .input-wrap {
+      position: relative;
+    }
+    .input-prefix, .input-suffix {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--gray-400);
+      pointer-events: none;
+    }
+    .input-prefix { left: 12px; }
+    .input-suffix { right: 12px; }
+
+    input[type="number"] {
+      width: 100%;
+      padding: 10px 12px;
+      font-size: 15px;
+      font-weight: 500;
+      border: 1.5px solid var(--gray-200);
+      border-radius: 8px;
+      outline: none;
+      transition: border-color 0.15s, box-shadow 0.15s;
+      background: var(--gray-100);
+      color: var(--gray-800);
+      -moz-appearance: textfield;
+    }
+    input[type="number"]::-webkit-outer-spin-button,
+    input[type="number"]::-webkit-inner-spin-button { -webkit-appearance: none; }
+
+    input[type="number"]:focus {
+      border-color: var(--gold);
+      box-shadow: 0 0 0 3px rgba(201,168,76,0.18);
+      background: var(--white);
+    }
+
+    .has-prefix input { padding-left: 28px; }
+    .has-suffix input { padding-right: 32px; }
+
+    /* ── Two-col fields ── */
+    .fields-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    /* ── Results ── */
+    .results-card .card-header { background: var(--navy-dark); }
+
+    .result-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 0;
+      border-bottom: 1px solid var(--gray-100);
+    }
+    .result-item:last-child { border-bottom: none; }
+
+    .result-label {
+      font-size: 13px;
+      color: var(--gray-600);
+      font-weight: 500;
+    }
+    .result-value {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--navy);
+    }
+
+    /* ── Cap Rate Hero ── */
+    .cap-rate-hero {
+      text-align: center;
+      padding: 28px 20px;
+      border-radius: var(--radius);
+      margin-bottom: 20px;
+      transition: background 0.3s, color 0.3s;
+    }
+    .cap-rate-hero .label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      opacity: 0.7;
+      margin-bottom: 6px;
+    }
+    .cap-rate-hero .value {
+      font-size: clamp(44px, 10vw, 64px);
+      font-weight: 800;
+      line-height: 1;
+      letter-spacing: -2px;
+    }
+    .cap-rate-hero .verdict {
+      margin-top: 8px;
+      font-size: 14px;
+      font-weight: 600;
+      opacity: 0.85;
+    }
+
+    .cap-red    { background: var(--red-bg);    color: var(--red); }
+    .cap-yellow { background: var(--yellow-bg); color: var(--yellow); }
+    .cap-green  { background: var(--green-bg);  color: var(--green); }
+    .cap-none   { background: var(--gray-100);  color: var(--gray-400); }
+
+    /* ── Divider ── */
+    .divider {
+      height: 1px;
+      background: var(--gray-200);
+      margin: 16px 0;
+    }
+
+    /* ── Cash flow ── */
+    .cashflow-box {
+      background: var(--navy);
+      color: var(--white);
+      border-radius: var(--radius);
+      padding: 20px;
+      text-align: center;
+      margin-top: 20px;
+    }
+    .cashflow-box .label {
+      font-size: 11px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--gold);
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+    .cashflow-box .value {
+      font-size: 36px;
+      font-weight: 800;
+      letter-spacing: -1px;
+    }
+    .cashflow-box .sub {
+      font-size: 12px;
+      color: rgba(255,255,255,0.5);
+      margin-top: 4px;
+    }
+    .cashflow-pos { color: var(--gold-light); }
+    .cashflow-neg { color: #f87171; }
+
+    /* ── Reset button ── */
+    .btn-reset {
+      display: block;
+      width: 100%;
+      margin-top: 20px;
+      padding: 13px;
+      background: transparent;
+      border: 2px solid var(--gold);
+      color: var(--gold-dark);
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 0.15s, color 0.15s;
+    }
+    .btn-reset:hover {
+      background: var(--gold);
+      color: var(--navy-dark);
+    }
+
+    /* ── Footnote ── */
+    footer {
+      text-align: center;
+      font-size: 11px;
+      color: var(--gray-400);
+      padding: 0 20px 32px;
+    }
+    footer span { color: var(--gold-dark); font-weight: 600; }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="brand">CapStar Real Estate</div>
+  <h1>PadSplit Cap Rate Calculator</h1>
+  <p>Analyze co-living investment properties in real time</p>
+</header>
+
+<div class="container">
+  <div class="grid">
+
+    <!-- ── LEFT COLUMN: Inputs ── -->
+    <div>
+
+      <!-- Property Basics -->
+      <div class="card" style="margin-bottom:20px">
+        <div class="card-header"><div class="icon">🏠</div>Property Details</div>
+        <div class="card-body">
+
+          <div class="field">
+            <label>Purchase Price</label>
+            <div class="input-wrap has-prefix">
+              <span class="input-prefix">$</span>
+              <input type="number" id="purchasePrice" value="250000" min="0" step="1000" />
+            </div>
+          </div>
+
+          <div class="fields-row">
+            <div class="field">
+              <label>Number of Rooms</label>
+              <input type="number" id="numRooms" value="4" min="1" step="1" />
+            </div>
+            <div class="field">
+              <label>Rent / Room / Month</label>
+              <div class="input-wrap has-prefix">
+                <span class="input-prefix">$</span>
+                <input type="number" id="rentPerRoom" value="750" min="0" step="25" />
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Operating Expenses -->
+      <div class="card" style="margin-bottom:20px">
+        <div class="card-header"><div class="icon">📋</div>Annual Expenses</div>
+        <div class="card-body">
+
+          <div class="fields-row">
+            <div class="field">
+              <label>Property Taxes</label>
+              <div class="input-wrap has-prefix">
+                <span class="input-prefix">$</span>
+                <input type="number" id="taxes" value="3000" min="0" step="100" />
+              </div>
+            </div>
+            <div class="field">
+              <label>Insurance</label>
+              <div class="input-wrap has-prefix">
+                <span class="input-prefix">$</span>
+                <input type="number" id="insurance" value="1800" min="0" step="100" />
+              </div>
+            </div>
+          </div>
+
+          <div class="fields-row">
+            <div class="field">
+              <label>Maintenance Reserve</label>
+              <div class="input-wrap has-suffix">
+                <input type="number" id="maintenancePct" value="5" min="0" max="100" step="0.5" />
+                <span class="input-suffix">%</span>
+              </div>
+            </div>
+            <div class="field">
+              <label>PadSplit Platform Fee</label>
+              <div class="input-wrap has-suffix">
+                <input type="number" id="padsplitFeePct" value="15" min="0" max="100" step="0.5" />
+                <span class="input-suffix">%</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Mortgage -->
+      <div class="card">
+        <div class="card-header"><div class="icon">🏦</div>Mortgage Details</div>
+        <div class="card-body">
+
+          <div class="field">
+            <label>Loan Amount</label>
+            <div class="input-wrap has-prefix">
+              <span class="input-prefix">$</span>
+              <input type="number" id="loanAmount" value="200000" min="0" step="1000" />
+            </div>
+          </div>
+
+          <div class="fields-row">
+            <div class="field">
+              <label>Interest Rate</label>
+              <div class="input-wrap has-suffix">
+                <input type="number" id="interestRate" value="7.5" min="0" max="30" step="0.125" />
+                <span class="input-suffix">%</span>
+              </div>
+            </div>
+            <div class="field">
+              <label>Loan Term (Years)</label>
+              <input type="number" id="loanTerm" value="30" min="1" max="40" step="1" />
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ── RIGHT COLUMN: Results ── -->
+    <div>
+
+      <!-- Cap Rate Hero -->
+      <div id="capRateHero" class="cap-rate-hero cap-none">
+        <div class="label">Cap Rate</div>
+        <div class="value" id="capRateDisplay">—</div>
+        <div class="verdict" id="capRateVerdict">Enter values to calculate</div>
+      </div>
+
+      <!-- Results breakdown -->
+      <div class="card results-card">
+        <div class="card-header"><div class="icon">📊</div>Investment Analysis</div>
+        <div class="card-body">
+
+          <div class="result-item">
+            <span class="result-label">Gross Annual Income</span>
+            <span class="result-value" id="grossIncome">—</span>
+          </div>
+          <div class="result-item">
+            <span class="result-label">PadSplit Fee (annual)</span>
+            <span class="result-value" id="padsplitFee">—</span>
+          </div>
+          <div class="result-item">
+            <span class="result-label">Maintenance Reserve</span>
+            <span class="result-value" id="maintenanceReserve">—</span>
+          </div>
+          <div class="result-item">
+            <span class="result-label">Property Taxes</span>
+            <span class="result-value" id="taxesDisplay">—</span>
+          </div>
+          <div class="result-item">
+            <span class="result-label">Insurance</span>
+            <span class="result-value" id="insuranceDisplay">—</span>
+          </div>
+
+          <div class="divider"></div>
+
+          <div class="result-item">
+            <span class="result-label" style="font-weight:700;color:var(--navy)">Net Operating Income (NOI)</span>
+            <span class="result-value" style="font-size:20px" id="noi">—</span>
+          </div>
+
+          <div class="divider"></div>
+
+          <div class="result-item">
+            <span class="result-label">Monthly Mortgage Payment</span>
+            <span class="result-value" id="mortgagePayment">—</span>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Monthly Cash Flow -->
+      <div class="cashflow-box">
+        <div class="label">Monthly Cash Flow</div>
+        <div class="value" id="cashFlow">—</div>
+        <div class="sub">After mortgage · Before income tax</div>
+      </div>
+
+      <!-- Reset -->
+      <button class="btn-reset" onclick="resetForm()">↺ Reset to Defaults</button>
+
+    </div>
+  </div>
+</div>
+
+<footer>
+  Estimates only — not financial advice. &nbsp;|&nbsp;
+  <span>CapStar Real Estate</span> &nbsp;|&nbsp;
+  Results update live as you type
+</footer>
+
+<script>
+  const defaults = {
+    purchasePrice: 250000,
+    numRooms: 4,
+    rentPerRoom: 750,
+    taxes: 3000,
+    insurance: 1800,
+    maintenancePct: 5,
+    padsplitFeePct: 15,
+    loanAmount: 200000,
+    interestRate: 7.5,
+    loanTerm: 30,
+  };
+
+  function fmt(n, decimals = 0) {
+    if (!isFinite(n)) return '—';
+    return '$' + n.toLocaleString('en-US', {
+      minimumFractionDigits: decimals,
+      maximumFractionDigits: decimals,
+    });
+  }
+
+  function pct(n) {
+    if (!isFinite(n)) return '—';
+    return n.toFixed(2) + '%';
+  }
+
+  function monthlyMortgage(principal, annualRate, years) {
+    if (principal <= 0 || years <= 0) return 0;
+    if (annualRate === 0) return principal / (years * 12);
+    const r = annualRate / 100 / 12;
+    const n = years * 12;
+    return principal * (r * Math.pow(1 + r, n)) / (Math.pow(1 + r, n) - 1);
+  }
+
+  function val(id) {
+    return parseFloat(document.getElementById(id).value) || 0;
+  }
+
+  function calculate() {
+    const purchasePrice   = val('purchasePrice');
+    const numRooms        = val('numRooms');
+    const rentPerRoom     = val('rentPerRoom');
+    const taxes           = val('taxes');
+    const insurance       = val('insurance');
+    const maintenancePct  = val('maintenancePct');
+    const padsplitFeePct  = val('padsplitFeePct');
+    const loanAmount      = val('loanAmount');
+    const interestRate    = val('interestRate');
+    const loanTerm        = val('loanTerm');
+
+    const grossAnnual      = numRooms * rentPerRoom * 12;
+    const padsplitFeeAmt   = grossAnnual * (padsplitFeePct / 100);
+    const maintenanceAmt   = grossAnnual * (maintenancePct / 100);
+    const noi              = grossAnnual - padsplitFeeAmt - taxes - insurance - maintenanceAmt;
+    const capRate          = purchasePrice > 0 ? (noi / purchasePrice) * 100 : 0;
+    const mortgage         = monthlyMortgage(loanAmount, interestRate, loanTerm);
+    const cashFlow         = (noi / 12) - mortgage;
+
+    // Update DOM
+    document.getElementById('grossIncome').textContent       = fmt(grossAnnual);
+    document.getElementById('padsplitFee').textContent       = fmt(padsplitFeeAmt);
+    document.getElementById('maintenanceReserve').textContent = fmt(maintenanceAmt);
+    document.getElementById('taxesDisplay').textContent      = fmt(taxes);
+    document.getElementById('insuranceDisplay').textContent  = fmt(insurance);
+    document.getElementById('noi').textContent               = fmt(noi);
+    document.getElementById('mortgagePayment').textContent   = fmt(mortgage, 2);
+
+    // Cap rate hero
+    const hero    = document.getElementById('capRateHero');
+    const display = document.getElementById('capRateDisplay');
+    const verdict = document.getElementById('capRateVerdict');
+
+    hero.className = 'cap-rate-hero';
+    if (purchasePrice === 0 || grossAnnual === 0) {
+      display.textContent = '—';
+      verdict.textContent = 'Enter values to calculate';
+      hero.classList.add('cap-none');
+    } else if (capRate < 7) {
+      display.textContent = pct(capRate);
+      verdict.textContent = '⚠ Below target — consider renegotiating price or expenses';
+      hero.classList.add('cap-red');
+    } else if (capRate < 8) {
+      display.textContent = pct(capRate);
+      verdict.textContent = '◉ Borderline — worth a closer look';
+      hero.classList.add('cap-yellow');
+    } else {
+      display.textContent = pct(capRate);
+      verdict.textContent = '✓ Strong return — meets PadSplit target threshold';
+      hero.classList.add('cap-green');
+    }
+
+    // Cash flow
+    const cfEl = document.getElementById('cashFlow');
+    cfEl.className = 'value';
+    if (grossAnnual === 0) {
+      cfEl.textContent = '—';
+    } else {
+      cfEl.textContent = fmt(cashFlow, 2);
+      cfEl.classList.add(cashFlow >= 0 ? 'cashflow-pos' : 'cashflow-neg');
+    }
+  }
+
+  function resetForm() {
+    Object.entries(defaults).forEach(([id, v]) => {
+      document.getElementById(id).value = v;
+    });
+    calculate();
+  }
+
+  // Wire up live recalculation
+  document.querySelectorAll('input[type="number"]').forEach(el => {
+    el.addEventListener('input', calculate);
+  });
+
+  // Initial calculation
+  calculate();
+</script>
+</body>
+</html>
