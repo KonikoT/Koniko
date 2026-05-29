@@ -1,0 +1,728 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Wifey Playbook — Call Her Wifey</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    .wifey-page {
+      font-family: 'Lato', sans-serif;
+      color: #2C1A1A;
+      background: #FFFAF9;
+      max-width: 680px;
+      margin: 0 auto;
+      overflow-x: hidden;
+    }
+
+    /* ── TYPOGRAPHY ── */
+    .w-serif { font-family: 'Playfair Display', serif; }
+    .w-italic { font-style: italic; }
+    .w-bold { font-weight: 700; }
+    .w-rose { color: #8B2252; }
+    .w-muted { color: #7A5A5A; font-weight: 400; }
+
+    /* ── DIVIDER ── */
+    .w-divider {
+      display: flex; align-items: center;
+      justify-content: center; gap: 12px;
+      margin: 2rem 0;
+    }
+    .w-divider::before, .w-divider::after {
+      content: ''; height: 0.5px;
+      width: 60px; background: #D4A0B0;
+    }
+    .w-divider span { color: #8B2252; font-size: 16px; }
+
+    /* ── SECTION ── */
+    .w-section { padding: 2.5rem 1.5rem; }
+    .w-section-rose { background: #FDF0F5; padding: 2.5rem 1.5rem; }
+
+    /* ── HEADLINES ── */
+    .w-h1 {
+      font-family: 'Playfair Display', serif;
+      font-style: italic; font-weight: 700;
+      font-size: clamp(26px, 5vw, 38px);
+      color: #2C1A1A; line-height: 1.2;
+      text-align: center; margin-bottom: 1rem;
+    }
+    .w-h2 {
+      font-family: 'Playfair Display', serif;
+      font-style: italic; font-weight: 700;
+      font-size: clamp(20px, 4vw, 28px);
+      color: #8B2252; line-height: 1.3;
+      text-align: center; margin-bottom: 0.75rem;
+    }
+    .w-h3 {
+      font-family: 'Playfair Display', serif;
+      font-style: italic; font-weight: 700;
+      font-size: 18px; color: #8B2252;
+      margin-bottom: 0.5rem;
+    }
+    .w-body {
+      font-size: 16px; line-height: 1.9;
+      color: #5C3D3D; font-weight: 400;
+      text-align: center; margin-bottom: 0.75rem;
+    }
+    .w-body-left {
+      font-size: 16px; line-height: 1.9;
+      color: #5C3D3D; font-weight: 400;
+      margin-bottom: 0.6rem;
+    }
+
+    /* ── PRE HEADLINE ── */
+    .w-pre {
+      font-family: 'Playfair Display', serif;
+      font-style: italic; font-size: 16px;
+      color: #7A5A5A; text-align: center;
+      line-height: 1.7; margin-bottom: 1.5rem;
+    }
+    .w-pre em { color: #8B2252; font-style: italic; font-weight: 700; }
+
+    /* ── CTA BUTTON ── */
+    .w-btn {
+      display: block; width: 100%;
+      background: #8B2252; color: #fff !important;
+      font-family: 'Lato', sans-serif;
+      font-size: 16px; font-weight: 700;
+      letter-spacing: 0.08em; padding: 18px 24px;
+      border-radius: 50px; border: none;
+      cursor: pointer; text-align: center;
+      text-decoration: none; margin: 1.5rem 0 0.5rem;
+    }
+    .w-btn-sub {
+      font-size: 12px; color: #7A5A5A;
+      text-align: center; letter-spacing: 0.05em;
+      font-weight: 400;
+    }
+
+    /* ── QUOTE BAR ── */
+    .w-quote-bar {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px; margin: 1.5rem 0;
+    }
+    .w-quote-card {
+      background: #fff; border: 0.5px solid #E8C4D0;
+      border-radius: 10px; padding: 1rem;
+      text-align: center;
+    }
+    .w-stars { color: #8B2252; font-size: 11px; margin-bottom: 0.4rem; }
+    .w-quote-text {
+      font-family: 'Playfair Display', serif;
+      font-style: italic; font-size: 12px;
+      color: #2C1A1A; line-height: 1.5;
+      margin-bottom: 0.4rem;
+    }
+    .w-quote-name {
+      font-size: 11px; color: #8B2252;
+      font-weight: 700; letter-spacing: 0.05em;
+    }
+
+    /* ── WOMAN CARDS ── */
+    .w-woman-card {
+      background: #fff; border: 0.5px solid #E8C4D0;
+      border-radius: 12px; padding: 1.25rem 1.5rem;
+      margin-bottom: 1rem; border-left: 3px solid #8B2252;
+    }
+    .w-woman-header {
+      display: flex; align-items: center;
+      gap: 10px; margin-bottom: 0.75rem;
+    }
+    .w-woman-emoji {
+      font-size: 22px; width: 40px; height: 40px;
+      background: #F9EEF3; border: 0.5px solid #E8C4D0;
+      border-radius: 50%; display: flex;
+      align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+    .w-woman-title {
+      font-family: 'Playfair Display', serif;
+      font-style: italic; font-weight: 700;
+      font-size: 16px; color: #8B2252;
+      line-height: 1.3;
+    }
+
+    /* ── HIGHLIGHT BOX ── */
+    .w-highlight {
+      background: #FDF5F8;
+      border-left: 2px solid #D4A0B0;
+      border-radius: 0 8px 8px 0;
+      padding: 0.75rem 1rem; margin-top: 0.75rem;
+      font-family: 'Playfair Display', serif;
+      font-style: italic; font-size: 14px;
+      color: #8B2252; line-height: 1.6;
+    }
+
+    /* ── WHAT'S INSIDE ── */
+    .w-inside-item {
+      display: flex; gap: 12px; align-items: flex-start;
+      padding: 1rem 0;
+      border-bottom: 0.5px solid #F0D8E2;
+    }
+    .w-inside-item:last-child { border-bottom: none; }
+    .w-inside-emoji { font-size: 24px; flex-shrink: 0; margin-top: 2px; }
+    .w-inside-title {
+      font-family: 'Playfair Display', serif;
+      font-weight: 700; font-size: 16px;
+      color: #2C1A1A; margin-bottom: 3px;
+    }
+    .w-inside-desc {
+      font-size: 13px; color: #7A5A5A;
+      font-weight: 400; line-height: 1.6;
+    }
+
+    /* ── VALUE TABLE ── */
+    .w-table {
+      width: 100%; border-collapse: collapse;
+      margin: 1rem 0; font-size: 14px;
+    }
+    .w-table tr { border-bottom: 0.5px solid #F0D8E2; }
+    .w-table tr:last-child { border-bottom: none; }
+    .w-table td { padding: 10px 8px; color: #5C3D3D; font-weight: 400; }
+    .w-table td:last-child { text-align: right; color: #8B2252; font-weight: 700; }
+    .w-table .w-table-head td {
+      background: #8B2252; color: #fff !important;
+      font-weight: 700; font-size: 13px;
+      letter-spacing: 0.05em;
+    }
+    .w-table .w-table-total td {
+      background: #FDF0F5; font-weight: 700;
+      font-size: 15px; color: #2C1A1A;
+    }
+    .w-table .w-table-price td {
+      background: #8B2252; color: #fff !important;
+      font-weight: 700; font-size: 16px;
+    }
+
+    /* ── TESTIMONIAL CARDS ── */
+    .w-testimonial {
+      background: #fff; border: 0.5px solid #E8C4D0;
+      border-radius: 12px; padding: 1.25rem;
+      margin-bottom: 1rem;
+    }
+    .w-testimonial-quote {
+      font-family: 'Playfair Display', serif;
+      font-style: italic; font-size: 15px;
+      color: #2C1A1A; line-height: 1.7;
+      margin-bottom: 0.75rem;
+    }
+    .w-testimonial-name {
+      font-size: 13px; color: #8B2252;
+      font-weight: 700; letter-spacing: 0.05em;
+    }
+
+    /* ── FAQ CARD ── */
+    .w-faq-card {
+      background: #fff; border: 0.5px solid #E8C4D0;
+      border-radius: 12px; padding: 1.25rem 1.5rem;
+      margin-bottom: 0.875rem;
+      border-left: 3px solid #8B2252;
+    }
+    .w-faq-q {
+      font-family: 'Playfair Display', serif;
+      font-style: italic; font-weight: 700;
+      font-size: 16px; color: #8B2252;
+      margin-bottom: 0.6rem;
+    }
+    .w-faq-a {
+      font-size: 15px; line-height: 1.9;
+      color: #5C3D3D; font-weight: 400;
+    }
+    .w-faq-a + .w-faq-a { margin-top: 0.5rem; }
+    .w-faq-a strong { color: #2C1A1A; font-weight: 700; }
+
+    /* ── PILLS ── */
+    .w-pill-row { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 0.75rem; }
+    .w-pill {
+      background: #F9EEF3; border: 0.5px solid #E8C4D0;
+      border-radius: 50px; padding: 4px 12px;
+      font-size: 11px; color: #8B2252;
+      font-family: 'Lato', sans-serif;
+    }
+
+    /* ── BANNER ── */
+    .w-banner {
+      background: #8B2252; padding: 1.75rem 1.5rem;
+      text-align: center;
+    }
+    .w-banner p { color: #fff; }
+    .w-banner .w-h2 { color: #FFD6E7; }
+    .w-banner .w-body { color: rgba(255,255,255,0.85); }
+    .w-banner-btn {
+      display: inline-block; background: #fff;
+      color: #8B2252 !important; font-family: 'Lato', sans-serif;
+      font-size: 14px; font-weight: 700;
+      letter-spacing: 0.08em; padding: 14px 32px;
+      border-radius: 50px; text-decoration: none;
+      margin-top: 1.25rem;
+    }
+
+    /* ── GUARANTEE ── */
+    .w-guarantee {
+      display: flex; gap: 1rem; align-items: flex-start;
+      background: #FDF0F5; border: 0.5px solid #E8C4D0;
+      border-radius: 12px; padding: 1.5rem;
+    }
+    .w-guarantee-badge {
+      width: 60px; height: 60px; flex-shrink: 0;
+      background: #8B2252; border-radius: 50%;
+      display: flex; align-items: center;
+      justify-content: center;
+      font-family: 'Playfair Display', serif;
+      font-style: italic; font-weight: 700;
+      font-size: 10px; color: #fff;
+      text-align: center; line-height: 1.3;
+    }
+
+    /* ── CLOSING ── */
+    .w-closing {
+      background: #F9EEF3; padding: 2.5rem 1.5rem;
+      text-align: center;
+    }
+    .w-closing .w-h1 { color: #E0F7FA; }
+    .w-closing .w-body { color: rgba(255,255,255,0.85); }
+    .w-closing-rose { color: #E0F7FA; font-style: italic; font-size: 15px; margin: 1rem 0; }
+    .w-closing-btn {
+      display: block; width: 100%;
+      background: #8B2252; color: #fff !important;
+      font-family: 'Lato', sans-serif;
+      font-size: 16px; font-weight: 700;
+      letter-spacing: 0.08em; padding: 18px 24px;
+      border-radius: 50px; border: none;
+      cursor: pointer; text-align: center;
+      text-decoration: none; margin: 1.5rem 0 0.5rem;
+    }
+    .w-closing-sub { font-size: 12px; color: #7A5A5A; letter-spacing: 0.05em; }
+    .w-disclaimer { font-size: 11px; color: #9A7A7A; margin-top: 1rem; line-height: 1.6; }
+
+    /* ── MOBILE ── */
+    @media (max-width: 480px) {
+      .w-quote-bar { grid-template-columns: 1fr; gap: 8px; }
+      .w-h1 { font-size: 24px; }
+      .w-h2 { font-size: 20px; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="wifey-page">
+
+  <!-- ══ SECTION 1 — HERO ══ -->
+  <div class="w-section" style="text-align:center; padding-top: 3rem;">
+    <p class="w-pre">
+      You've wondered what those women know that you don't.<br>
+      The ones whose relationships look effortless.<br>
+      Whose homes feel warm and intentional.<br>
+      Whose men never stop choosing them.<br><br>
+      <em>Now you know.</em>
+    </p>
+
+    <h1 class="w-h1">Unlock What the Women With the Best Relationships Already Know.</h1>
+
+    <p class="w-body" style="margin-bottom:0.25rem;">The daily habits, recipes, rituals, and relationship psychology nobody taught us.</p>
+
+    <a href="https://callherwifey.mysamcart.com/call-her-wifey/" class="w-btn">✦ &nbsp; Unlock My Wifey Era &nbsp; ✦</a>
+    <p class="w-btn-sub">Instant digital download &nbsp;•&nbsp; 30-day guarantee &nbsp;•&nbsp; $297 value for just $27</p>
+  </div>
+
+  <!-- ══ SECTION 2 — WHAT IS CALL HER WIFEY ══ -->
+  <div class="w-section-rose" style="text-align:center;">
+    <h2 class="w-h2">So — What Is Call Her Wifey?</h2>
+    <div class="w-divider"><span>✦</span></div>
+    <p class="w-body">Being wifey isn't a title. It isn't a ring. It's a standard you set for yourself.</p>
+    <p class="w-body">You don't need a ring to be wifey. A man doesn't commit to who she might become. He commits to who she is right now — what he feels, what he experiences, what he sees when he watches her move through her life.</p>
+    <p class="w-body">How you show up in the beginning should carry through forever. Not because it has to. Because it's who you are.</p>
+    <div class="w-highlight" style="text-align:left; margin-top:1rem;">Love is not just a feeling. It's a daily practice. High effort. Because she wants to. 🌹</div>
+  </div>
+
+  <!-- ══ SECTION 3 — MISSION ══ -->
+  <div class="w-section" style="text-align:center;">
+    <h2 class="w-h2">High Effort. Because She Loves Him.<br>Because She Loves Herself. 🌹</h2>
+    <div class="w-divider"><span>✦</span></div>
+    <p class="w-body">The little considerations are not chores. They are love made visible. A man who feels chosen like this rises to meet her. He takes care of the woman who takes care of him.</p>
+    <p class="w-body">And for the woman who is still single? This energy doesn't just sustain a great relationship. It attracts one.</p>
+    <p class="w-body" style="color:#8B2252; font-family:'Playfair Display',serif; font-style:italic; font-weight:700; font-size:17px;">Step into your wifey era. The right man will find you there. 🌹</p>
+  </div>
+
+  <!-- ══ SECTION 4 — SOCIAL PROOF BAR ══ -->
+  <div class="w-section" style="background:#FDF0F5; padding: 1.5rem;">
+    <div class="w-quote-bar">
+      <div class="w-quote-card">
+        <div class="w-stars">★★★★★</div>
+        <p class="w-quote-text">"I finally felt like myself in my relationship."</p>
+        <p class="w-quote-name">— Aaliyah</p>
+      </div>
+      <div class="w-quote-card">
+        <div class="w-stars">★★★★★</div>
+        <p class="w-quote-text">"Now my friends call me for recipes."</p>
+        <p class="w-quote-name">— Samantha</p>
+      </div>
+      <div class="w-quote-card">
+        <div class="w-stars">★★★★★</div>
+        <p class="w-quote-text">"Not preachy. Not old fashioned. Just real."</p>
+        <p class="w-quote-name">— Jasmine</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ SECTION 5 — WHERE ARE YOU ══ -->
+  <div class="w-section">
+    <h2 class="w-h2">Where Are You on Your Wifey Journey?</h2>
+    <div class="w-divider"><span>✦</span></div>
+
+    <div class="w-woman-card">
+      <div class="w-woman-header">
+        <div class="w-woman-emoji">💍</div>
+        <p class="w-woman-title">You're engaged or newly married.</p>
+      </div>
+      <p class="w-body-left">Everyone prepared you for the wedding. Nobody prepared you for the marriage. You want to walk in marriage-ready — not just wedding-ready. This is your guide. 🌹</p>
+    </div>
+
+    <div class="w-woman-card">
+      <div class="w-woman-header">
+        <div class="w-woman-emoji">🌹</div>
+        <p class="w-woman-title">You're in a relationship and ready to go deeper.</p>
+      </div>
+      <p class="w-body-left">You love him. But sometimes you wonder if he really feels it. You want to show up for him beautifully — not because you have to. Because you want to. Until now you just didn't have the tools. 🌹</p>
+    </div>
+
+    <div class="w-woman-card">
+      <div class="w-woman-header">
+        <div class="w-woman-emoji">🔥</div>
+        <p class="w-woman-title">You want to reignite it.</p>
+      </div>
+      <p class="w-body-left">Maybe the kids are grown. The house is quieter. You're looking at the man who built this whole beautiful life with you — and you want to pour back into him. This is your season. That fire never went out. It just needs you to tend to it. 🌹</p>
+    </div>
+
+    <div class="w-woman-card" style="border-color:#C4637A; background:#FDF5F8;">
+      <div class="w-woman-header">
+        <div class="w-woman-emoji">💔</div>
+        <p class="w-woman-title">Your relationship is struggling and you're not ready to give up.</p>
+      </div>
+      <p class="w-body-left">Before you spend thousands on counseling. Before you start thinking about what comes next.</p>
+      <p class="w-body-left" style="color:#8B2252; font-weight:700;">Try $27.</p>
+      <p class="w-body-left">It only takes one person to change the temperature of a relationship. That person could be you. 🌹</p>
+    </div>
+
+    <div class="w-woman-card">
+      <div class="w-woman-header">
+        <div class="w-woman-emoji">✨</div>
+        <p class="w-woman-title">You're single and becoming her.</p>
+      </div>
+      <p class="w-body-left">When someone asks what you bring to the table — you will not hesitate. You will not shrink. You will know. Step into your era now. He will find you there. 🌹</p>
+    </div>
+
+    <div class="w-woman-card">
+      <div class="w-woman-header">
+        <div class="w-woman-emoji">💫</div>
+        <p class="w-woman-title">You just want to show up better.</p>
+      </div>
+      <p class="w-body-left">No label needed. You simply love deeply and want the tools to match that love. The cooking. The home. The self-care. The daily considerations. You want all of it. This is all of it. 🌹</p>
+    </div>
+
+    <p class="w-body" style="margin-top:1.5rem; font-family:'Playfair Display',serif; font-style:italic;">Wherever you are in your journey — this was written for you.</p>
+    <a href="https://callherwifey.mysamcart.com/call-her-wifey/" class="w-btn">✦ &nbsp; Step Into Your Wifey Era — $27 &nbsp; ✦</a>
+    <p class="w-btn-sub">$297 value &nbsp;•&nbsp; Instant download &nbsp;•&nbsp; 30-day guarantee</p>
+  </div>
+
+  <!-- ══ SECTION 6 — THE PROBLEM ══ -->
+  <div class="w-section-rose" style="text-align:center;">
+    <h2 class="w-h2">Nobody Sat Us Down and Taught Us This.</h2>
+    <div class="w-divider"><span>✦</span></div>
+    <p class="w-body">Not the cooking. Not the conversations. Not the little considerations that turn a good relationship into an extraordinary one.</p>
+    <p class="w-body">The women who make it look effortless aren't lucky. They know things.</p>
+    <p class="w-body" style="color:#8B2252; font-family:'Playfair Display',serif; font-style:italic; font-weight:700;">Now so will you. 🌹</p>
+  </div>
+
+  <!-- ══ SECTION 7 — WHO IT'S FOR ══ -->
+  <div class="w-section">
+    <h2 class="w-h2">Does Any of This Sound Like You?</h2>
+    <div class="w-divider"><span>✦</span></div>
+    <div style="max-width:480px; margin: 0 auto;">
+      <p class="w-body-left" style="padding: 8px 0; border-bottom: 0.5px solid #F0D8E2;">✔ &nbsp; Ready for your wifey era</p>
+      <p class="w-body-left" style="padding: 8px 0; border-bottom: 0.5px solid #F0D8E2;">✔ &nbsp; Single and becoming magnetic</p>
+      <p class="w-body-left" style="padding: 8px 0; border-bottom: 0.5px solid #F0D8E2;">✔ &nbsp; Dating with intention</p>
+      <p class="w-body-left" style="padding: 8px 0; border-bottom: 0.5px solid #F0D8E2;">✔ &nbsp; Newly engaged or married</p>
+      <p class="w-body-left" style="padding: 8px 0; border-bottom: 0.5px solid #F0D8E2;">✔ &nbsp; Years in — ready to pour back in</p>
+      <p class="w-body-left" style="padding: 8px 0; border-bottom: 0.5px solid #F0D8E2;">✔ &nbsp; On the brink — not giving up</p>
+      <p class="w-body-left" style="padding: 8px 0; border-bottom: 0.5px solid #F0D8E2;">✔ &nbsp; Never taught the little considerations</p>
+      <p class="w-body-left" style="padding: 8px 0;">✔ &nbsp; Want love that is felt — not just heard</p>
+    </div>
+    <p class="w-body" style="margin-top:1.5rem; font-family:'Playfair Display',serif; font-style:italic;">If you nodded at any of these — this was written for you. 🌹</p>
+  </div>
+
+  <!-- ══ SECTION 8 — IMAGINE ══ -->
+  <div class="w-section-rose">
+    <h2 class="w-h2">🌹 Imagine 30 Days From Now...</h2>
+    <div class="w-divider"><span>✦</span></div>
+    <p class="w-body">He comes home looking lighter. Less stressed. More present. Softer. He smiles when he opens the fridge — because a woman who loves him thought ahead.</p>
+    <p class="w-body">You did that.</p>
+    <p class="w-body">Every act of intentional love releases serotonin and dopamine. In you. Your brain rewards you for loving well. For showing up. For being her.</p>
+    <p class="w-body">So while he's walking around happier and more devoted — you're walking around with a quiet confidence and joy that has nothing to do with his approval.</p>
+    <div class="w-highlight">He is thriving. You are thriving. Together you are unstoppable. High effort. Because it makes you both happy. 🌹</div>
+    <a href="https://callherwifey.mysamcart.com/call-her-wifey/" class="w-btn">✦ &nbsp; I Want This — $27 Today &nbsp; ✦</a>
+  </div>
+
+  <!-- ══ SECTION 9 — WHAT'S INSIDE ══ -->
+  <div class="w-section">
+    <h2 class="w-h2">100+ Pages of Everything She Never Had — In One Place.</h2>
+    <p class="w-body" style="color:#8B2252; font-weight:700;">A $297 resource. Yours today for $27.</p>
+    <div class="w-divider"><span>✦</span></div>
+
+    <div class="w-inside-item">
+      <span class="w-inside-emoji">🍽️</span>
+      <div>
+        <p class="w-inside-title">69 Original Recipes + Full Grocery Lists</p>
+        <p class="w-inside-desc">From complete beginner to restaurant-level meals for the one you love. Every recipe includes a complete grocery list. Screenshot it right in the store.</p>
+      </div>
+    </div>
+    <div class="w-inside-item">
+      <span class="w-inside-emoji">🧠</span>
+      <div>
+        <p class="w-inside-title">Relationship Psychology Made Simple</p>
+        <p class="w-inside-desc">What builds devotion. When to have hard conversations. How to earn real respect. What creates security every single day.</p>
+      </div>
+    </div>
+    <div class="w-inside-item">
+      <span class="w-inside-emoji">📅</span>
+      <div>
+        <p class="w-inside-title">Meal Prep + Fridge Mapping System</p>
+        <p class="w-inside-desc">Set the whole week up with intention. He opens that fridge and feels you.</p>
+      </div>
+    </div>
+    <div class="w-inside-item">
+      <span class="w-inside-emoji">🏈</span>
+      <div>
+        <p class="w-inside-title">Game Day Hosting — Every Sport Every Season</p>
+        <p class="w-inside-desc">Every season covered. Every spread planned. Knowing when to be in it with him and when to let him be in it.</p>
+      </div>
+    </div>
+    <div class="w-inside-item">
+      <span class="w-inside-emoji">🤒</span>
+      <div>
+        <p class="w-inside-title">Sick Day &amp; Recovery Care Rituals</p>
+        <p class="w-inside-desc">The moments that get remembered for years. The soup. The environment. The quiet, thoughtful care.</p>
+      </div>
+    </div>
+    <div class="w-inside-item">
+      <span class="w-inside-emoji">🏡</span>
+      <div>
+        <p class="w-inside-title">Home Reset + Daily Systems</p>
+        <p class="w-inside-desc">His workspace kept clean. The Sunday reset. Systems that work for real life — not a Pinterest board.</p>
+      </div>
+    </div>
+    <div class="w-inside-item">
+      <span class="w-inside-emoji">✨</span>
+      <div>
+        <p class="w-inside-title">The Wifey Glow — Self-Care &amp; Feminine Energy</p>
+        <p class="w-inside-desc">High effort wifey starts with high effort self. Daily rituals, skincare, mental wellness, and the feminine energy habits that make you magnetic.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ SECTION 10 — THE STORY ══ -->
+  <div class="w-section-rose">
+    <h2 class="w-h2">The Story Behind The Playbook.</h2>
+    <div class="w-divider"><span>✦</span></div>
+    <p class="w-body">You already have the love. You just never had the guide.</p>
+    <p class="w-body">I went looking for it. I paid attention to the women whose relationships felt extraordinary. It was never one big thing. Always the small, intentional considerations.</p>
+    <p class="w-body">The men in those relationships rose to meet her — because she had already decided to rise. Together they were unstoppable.</p>
+    <p class="w-body">I wrote all of it down. So you don't have to piece it together alone.</p>
+    <div class="w-highlight">This is not a rulebook. This is the guide she always deserved. And now — it's yours. 🌹</div>
+  </div>
+
+  <!-- ══ SECTION 11 — TESTIMONIALS ══ -->
+  <div class="w-section">
+    <h2 class="w-h2">Real Women. Real Wifey Eras.</h2>
+    <div class="w-divider"><span>✦</span></div>
+
+    <div class="w-testimonial">
+      <div class="w-stars" style="margin-bottom:0.5rem;">★★★★★</div>
+      <p class="w-testimonial-quote">"I finally felt proud of the way I show up at home. It started with me deciding to be intentional — and everything around me shifted."</p>
+      <p class="w-testimonial-name">— Aaliyah</p>
+    </div>
+    <div class="w-testimonial">
+      <div class="w-stars" style="margin-bottom:0.5rem;">★★★★★</div>
+      <p class="w-testimonial-quote">"I had never cooked from scratch in my life. Now my friends call me for recipes. I just needed the tools."</p>
+      <p class="w-testimonial-name">— Samantha</p>
+    </div>
+    <div class="w-testimonial">
+      <div class="w-stars" style="margin-bottom:0.5rem;">★★★★★</div>
+      <p class="w-testimonial-quote">"It's not preachy. It's not old fashioned. It's the guide I wish I'd had ten years ago."</p>
+      <p class="w-testimonial-name">— Jasmine</p>
+    </div>
+    <div class="w-testimonial">
+      <div class="w-stars" style="margin-bottom:0.5rem;">★★★★★</div>
+      <p class="w-testimonial-quote">"17 years in and we felt new again. It started with me deciding to show up differently."</p>
+      <p class="w-testimonial-name">— Linda</p>
+    </div>
+    <div class="w-testimonial">
+      <div class="w-stars" style="margin-bottom:0.5rem;">★★★★★</div>
+      <p class="w-testimonial-quote">"He called me on his lunch break just to say how much he appreciated the week I'd set up for us. It meant everything."</p>
+      <p class="w-testimonial-name">— Simone</p>
+    </div>
+    <div class="w-testimonial">
+      <div class="w-stars" style="margin-bottom:0.5rem;">★★★★★</div>
+      <p class="w-testimonial-quote">"I went from barely keeping up to genuinely leading my relationship — with love, not stress."</p>
+      <p class="w-testimonial-name">— Bridgette</p>
+    </div>
+    <div class="w-testimonial">
+      <div class="w-stars" style="margin-bottom:0.5rem;">★★★★★</div>
+      <p class="w-testimonial-quote">"I got this as a bridal shower gift and it was the most useful thing I received. Two months into my marriage and I reference it every week."</p>
+      <p class="w-testimonial-name">— Danielle, newlywed</p>
+    </div>
+  </div>
+
+  <!-- ══ SECTION 12 — VALUE STACK ══ -->
+  <div class="w-section-rose">
+    <h2 class="w-h2">Everything You Get — One Price. Yours Forever.</h2>
+    <div class="w-divider"><span>✦</span></div>
+    <table class="w-table">
+      <tr class="w-table-head"><td>What's Inside</td><td>Value</td></tr>
+      <tr><td>The Wifey Playbook — 100+ pages</td><td>$97</td></tr>
+      <tr><td>69 Original Recipes + Grocery Lists</td><td>$67</td></tr>
+      <tr><td>Relationship Psychology — timing, devotion, care</td><td>$47</td></tr>
+      <tr><td>Meal Prep + Fridge Mapping System</td><td>$37</td></tr>
+      <tr><td>Game Day Hosting — Every Sport &amp; Season</td><td>$27</td></tr>
+      <tr><td>Sick Day &amp; Recovery Care Rituals</td><td>$27</td></tr>
+      <tr><td>The Wifey Glow — Self-Care &amp; Feminine Energy</td><td>$37</td></tr>
+      <tr class="w-table-total"><td>Total Value</td><td>$297</td></tr>
+      <tr class="w-table-price"><td>Your Price Today</td><td>$27</td></tr>
+    </table>
+    <p class="w-body" style="font-size:13px; margin-top:0.5rem;">Every future update included free. Yours forever.</p>
+    <a href="https://callherwifey.mysamcart.com/call-her-wifey/" class="w-btn">✦ &nbsp; I'm Ready — Step Into My Wifey Era for $27 &nbsp; ✦</a>
+    <p class="w-btn-sub">$297 value &nbsp;•&nbsp; Instant download &nbsp;•&nbsp; 30-day guarantee &nbsp;•&nbsp; Free updates forever</p>
+  </div>
+
+  <!-- ══ SECTION 13 — URGENCY ══ -->
+  <div class="w-section" style="text-align:center;">
+    <h2 class="w-h2">A Note on This Price.</h2>
+    <div class="w-divider"><span>✦</span></div>
+    <p class="w-body">$297 resource. $27 on purpose. Because every woman who is ready deserves to say yes without hesitation.</p>
+    <p class="w-body" style="color:#8B2252; font-family:'Playfair Display',serif; font-style:italic; font-weight:700;">Launch price will not last. Lock it in today. 🌹</p>
+  </div>
+
+  <!-- ══ SECTION 14 — GUARANTEE ══ -->
+  <div class="w-section" style="padding-top:0;">
+    <div class="w-guarantee">
+      <div class="w-guarantee-badge">30<br>Day<br>Guarantee</div>
+      <div>
+        <h3 class="w-h3" style="text-align:left; margin-bottom:0.4rem;">Zero Risk. Every Dollar Back.</h3>
+        <p class="w-body-left">If you don't feel a shift — reach out within 30 days for a full refund. No questions. No hoops. I stand behind every page. 🌹</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ SECTION 15 — BRIDAL BANNER ══ -->
+  <div class="w-banner">
+    <h2 class="w-h2" style="color:#FFD6E7;">💍 Stepping Into Your Wifey Era Starts Before the Wedding.</h2>
+    <p class="w-body" style="color:rgba(255,255,255,0.85);">Not another candle. Give her the guide that matters for the marriage — not just the wedding day.</p>
+    <p class="w-body" style="color:rgba(255,255,255,0.85);">The New Wife Starter Kit — Playbook + Before I Do Journal + First Year Tracker</p>
+    <a href="#" class="w-banner-btn">Shop The New Wife Starter Kit — $97</a>
+  </div>
+
+  <!-- ══ SECTION 16 — FAQ ══ -->
+  <div class="w-section">
+    <h2 class="w-h2">You Might Be Wondering...</h2>
+    <div class="w-divider"><span>✦</span></div>
+
+    <div class="w-faq-card">
+      <p class="w-faq-q">Will this actually change my relationship?</p>
+      <p class="w-faq-a">Yes — and it starts with your mindset. When he feels like you are making his life easier, that you are his <strong>breath of fresh air</strong>, his peace — everything shifts. He pours into you. Loves you more deeply. The home becomes peaceful and everyone in it thrives.</p>
+      <div class="w-highlight">A man who feels truly considered doesn't just love you. He cherishes you. That's what a great relationship actually looks like. 🌹</div>
+    </div>
+
+    <div class="w-faq-card">
+      <p class="w-faq-q">What about the recipes?</p>
+      <p class="w-faq-a"><strong>69 original recipes</strong> with full grocery lists — designed to take you from complete beginner to making <strong>restaurant-level meals</strong> for the one you love. No experience needed.</p>
+      <div class="w-highlight">"This is better than my favorite restaurant." That moment? That's yours. 🌹</div>
+      <div class="w-pill-row">
+        <span class="w-pill">Grocery lists included</span>
+        <span class="w-pill">Screenshot-friendly</span>
+        <span class="w-pill">Beginner to advanced</span>
+      </div>
+    </div>
+
+    <div class="w-faq-card">
+      <p class="w-faq-q">How do I earn his respect?</p>
+      <p class="w-faq-a">By giving it first — in the daily considerations, the timing, the home, the energy you bring. Respect is built in the details. Every single day. 🌹</p>
+    </div>
+
+    <div class="w-faq-card">
+      <p class="w-faq-q">Is this a tradwife guide?</p>
+      <p class="w-faq-a">No. Tradwife culture leans heavily on dependency and that's not something we condone. Unless you are absolutely certain this man will take care of you for the rest of your life — <strong>every woman should have her own income and independence.</strong></p>
+      <p class="w-faq-a">Call Her Wifey is for the <strong>modern woman</strong> — the one who works, builds, earns, and still comes home and loves intentionally.</p>
+      <div class="w-highlight">She refuses to choose between independence and love. That's who Call Her Wifey was built for. 🌹</div>
+    </div>
+
+    <div class="w-faq-card">
+      <p class="w-faq-q">Is this just about serving my partner?</p>
+      <p class="w-faq-a">Absolutely not. The Wifey Playbook has an entire section dedicated entirely to <strong>you</strong> — called <em style="color:#8B2252;">The Wifey Glow.</em> Daily self-care rituals, skincare, mental wellness, and the feminine energy habits that keep you feeling radiant and magnetic.</p>
+      <div class="w-highlight">You cannot pour from an empty cup. When you glow — everything around you reflects it. And you do it because you deserve it. 🌹</div>
+    </div>
+
+    <div class="w-faq-card">
+      <p class="w-faq-q">What format and refund policy?</p>
+      <p class="w-faq-a">Beautifully designed <strong>PDF</strong>. Instant delivery to your inbox. Print-friendly. Read on any device. <strong>30-day money back guarantee — full stop.</strong> No questions. Every dollar back. 🌹</p>
+      <div class="w-pill-row">
+        <span class="w-pill">Instant delivery</span>
+        <span class="w-pill">Print-friendly</span>
+        <span class="w-pill">Any device</span>
+        <span class="w-pill">Free updates forever</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ SECTION 17 — THIS COULD BE YOU ══ -->
+  <div class="w-section-rose">
+    <h2 class="w-h2">This Could Be You. 👇</h2>
+    <p class="w-body">These are women who stepped into their wifey era and felt everything shift.</p>
+    <div class="w-divider"><span>✦</span></div>
+
+    <div class="w-testimonial">
+      <div class="w-stars" style="margin-bottom:0.5rem;">★★★★★</div>
+      <p class="w-testimonial-quote">"I showed up differently. I felt different. My relationship feels like it did when we first fell in love."</p>
+      <p class="w-testimonial-name">— Kendall</p>
+    </div>
+    <div class="w-testimonial">
+      <div class="w-stars" style="margin-bottom:0.5rem;">★★★★★</div>
+      <p class="w-testimonial-quote">"From barely keeping up to genuinely leading my relationship — with love, not stress."</p>
+      <p class="w-testimonial-name">— Bridgette</p>
+    </div>
+    <div class="w-testimonial">
+      <div class="w-stars" style="margin-bottom:0.5rem;">★★★★★</div>
+      <p class="w-testimonial-quote">"I got this as a bridal shower gift. Two months into my marriage and I reference it every single week."</p>
+      <p class="w-testimonial-name">— Danielle, newlywed</p>
+    </div>
+    <div class="w-testimonial">
+      <div class="w-stars" style="margin-bottom:0.5rem;">★★★★★</div>
+      <p class="w-testimonial-quote">"He called me on his lunch break just to say how much he appreciated everything. It meant everything."</p>
+      <p class="w-testimonial-name">— Simone</p>
+    </div>
+    <div class="w-testimonial">
+      <div class="w-stars" style="margin-bottom:0.5rem;">★★★★★</div>
+      <p class="w-testimonial-quote">"17 years in and we felt new again. It started with me deciding to show up differently."</p>
+      <p class="w-testimonial-name">— Linda</p>
+    </div>
+  </div>
+
+  <!-- ══ SECTION 18 — CLOSING CTA ══ -->
+  <div class="w-closing">
+    <h1 class="w-h1" style="color:#8B2252;">She Loves Deeply.<br>She Shows Up Fully.<br>She Knows Exactly What She Brings.</h1>
+    <div class="w-divider" style="margin:1.25rem 0;"><span style="color:#8B2252;">✦</span></div>
+    <p class="w-body" style="color:#5C3D3D;">That woman is you. This is her guide.</p>
+    <p class="w-body" style="color:#5C3D3D;">High effort. Because she wants to. With the guide she never had.</p>
+    <p class="w-body" style="color:#5C3D3D;">Because when he thrives, she thrives. Together — unstoppable. 🌹</p>
+    <a href="https://callherwifey.mysamcart.com/call-her-wifey/" class="w-closing-btn">✦ &nbsp; I'm Ready — Step Into My Wifey Era for $27 &nbsp; ✦</a>
+    <p class="w-closing-sub">$297 value &nbsp;•&nbsp; Instant download &nbsp;•&nbsp; 30-day guarantee &nbsp;•&nbsp; Free updates forever</p>
+    <p class="w-disclaimer">Results depend on individual effort and implementation. Every relationship is different.<br>Please double check your email address — your Wifey Playbook will be delivered there instantly after purchase.</p>
+    <p class="w-disclaimer" style="margin-top:1rem;">© Call Her Wifey | callherwifey.store</p>
+  </div>
+
+</div>
+
+</body>
+</html>
