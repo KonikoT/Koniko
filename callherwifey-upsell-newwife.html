@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Special One-Time Offer — The New Wife Starter Kit</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Lato', sans-serif;
+      background: #FFFAF9;
+      color: #2C1A1A;
+    }
+
+    .page {
+      max-width: 620px;
+      margin: 0 auto;
+      padding: 0 0 60px;
+    }
+
+    /* ── TOP BAR ── */
+    .top-bar {
+      background: #2C1A1A;
+      color: #fff;
+      text-align: center;
+      padding: 12px 20px;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+    }
+    .top-bar span { color: #FFD6E7; }
+
+    /* ── CONGRATS BANNER ── */
+    .congrats {
+      background: #FDF0F5;
+      border-bottom: 1px solid #E8C4D0;
+      padding: 1.5rem 1.5rem 1.25rem;
+      text-align: center;
+    }
+    .congrats-badge {
+      display: inline-block;
+      background: #16a34a;
+      color: #fff;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      padding: 5px 14px;
+      border-radius: 50px;
+      margin-bottom: 0.75rem;
+    }
+    .congrats p {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: 15px;
+      color: #5C3D3D;
+      line-height: 1.7;
+    }
+
+    /* ── WAIT BLOCK ── */
+    .wait-block {
+      background: #8B2252;
+      padding: 2rem 1.5rem;
+      text-align: center;
+    }
+    .wait-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.6);
+      margin-bottom: 0.75rem;
+    }
+    .wait-h1 {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-weight: 700;
+      font-size: clamp(24px, 5vw, 34px);
+      color: #FFD6E7;
+      line-height: 1.2;
+      margin-bottom: 1rem;
+    }
+    .wait-sub {
+      font-size: 15px;
+      color: rgba(255,255,255,0.8);
+      line-height: 1.8;
+    }
+
+    /* ── ONE TIME OFFER TAG ── */
+    .oto-tag {
+      background: #FFD6E7;
+      text-align: center;
+      padding: 10px;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: #8B2252;
+    }
+
+    /* ── SECTION ── */
+    .section { padding: 2rem 1.5rem; }
+    .section-rose { background: #FDF0F5; padding: 2rem 1.5rem; }
+
+    .h2 {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-weight: 700;
+      font-size: clamp(20px, 4vw, 26px);
+      color: #8B2252;
+      text-align: center;
+      line-height: 1.3;
+      margin-bottom: 0.75rem;
+    }
+    .body {
+      font-size: 15px;
+      line-height: 1.9;
+      color: #5C3D3D;
+      text-align: center;
+      margin-bottom: 0.75rem;
+    }
+    .body-left {
+      font-size: 15px;
+      line-height: 1.9;
+      color: #5C3D3D;
+      margin-bottom: 0.5rem;
+    }
+
+    .divider {
+      display: flex; align-items: center;
+      justify-content: center; gap: 12px;
+      margin: 1.25rem 0;
+    }
+    .divider::before, .divider::after {
+      content: ''; height: 0.5px;
+      width: 50px; background: #D4A0B0;
+    }
+    .divider span { color: #8B2252; font-size: 14px; }
+
+    /* ── WHAT'S INCLUDED ── */
+    .kit-item {
+      background: #fff;
+      border: 0.5px solid #E8C4D0;
+      border-radius: 12px;
+      border-left: 3px solid #8B2252;
+      padding: 1.25rem 1.5rem;
+      margin-bottom: 1rem;
+    }
+    .kit-item-header {
+      display: flex; align-items: center;
+      gap: 12px; margin-bottom: 0.75rem;
+    }
+    .kit-emoji {
+      font-size: 28px; width: 48px; height: 48px;
+      background: #F9EEF3;
+      border: 0.5px solid #E8C4D0;
+      border-radius: 50%;
+      display: flex; align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .kit-title {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-weight: 700;
+      font-size: 17px;
+      color: #2C1A1A;
+      line-height: 1.3;
+    }
+    .kit-value {
+      font-size: 12px;
+      color: #8B2252;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+    }
+    .kit-desc {
+      font-size: 13px;
+      color: #7A5A5A;
+      line-height: 1.7;
+    }
+
+    /* ── HIGHLIGHT ── */
+    .highlight {
+      background: #FDF5F8;
+      border-left: 2px solid #D4A0B0;
+      border-radius: 0 8px 8px 0;
+      padding: 0.875rem 1rem;
+      margin: 1rem 0;
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: 14px;
+      color: #8B2252;
+      line-height: 1.6;
+    }
+
+    /* ── VALUE TABLE ── */
+    .v-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1rem 0;
+      font-size: 14px;
+    }
+    .v-table tr { border-bottom: 0.5px solid #F0D8E2; }
+    .v-table tr:last-child { border-bottom: none; }
+    .v-table td { padding: 10px 8px; color: #5C3D3D; }
+    .v-table td:last-child { text-align: right; color: #8B2252; font-weight: 700; }
+    .v-table .head td {
+      background: #8B2252; color: #fff !important;
+      font-weight: 700; font-size: 12px;
+      letter-spacing: 0.05em;
+    }
+    .v-table .total td {
+      background: #FDF0F5; font-weight: 700;
+      font-size: 15px; color: #2C1A1A;
+    }
+    .v-table .price td {
+      background: #8B2252; color: #fff !important;
+      font-weight: 700; font-size: 16px;
+    }
+
+    /* ── PRICE HERO ── */
+    .price-hero {
+      text-align: center;
+      padding: 1.75rem 1.5rem;
+      background: #fff;
+      border: 0.5px solid #E8C4D0;
+      border-radius: 12px;
+      margin: 1rem 0;
+    }
+    .price-original {
+      font-size: 14px;
+      color: #9A7A7A;
+      text-decoration: line-through;
+      margin-bottom: 4px;
+    }
+    .price-now {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(48px, 12vw, 72px);
+      font-weight: 700;
+      color: #8B2252;
+      line-height: 1;
+      letter-spacing: -2px;
+    }
+    .price-sub {
+      font-size: 13px;
+      color: #7A5A5A;
+      margin-top: 6px;
+    }
+
+    /* ── YES BUTTON ── */
+    .btn-yes {
+      display: block;
+      width: 100%;
+      background: #8B2252;
+      color: #fff !important;
+      font-family: 'Lato', sans-serif;
+      font-size: 16px;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      padding: 20px 24px;
+      border-radius: 50px;
+      border: none;
+      cursor: pointer;
+      text-align: center;
+      text-decoration: none;
+      margin: 1.25rem 0 0.5rem;
+      line-height: 1.4;
+    }
+    .btn-yes-sub {
+      font-size: 12px;
+      color: #7A5A5A;
+      text-align: center;
+      letter-spacing: 0.05em;
+      margin-bottom: 1.25rem;
+    }
+
+    /* ── NO THANKS ── */
+    .no-thanks {
+      text-align: center;
+      padding: 0.5rem 1.5rem 1rem;
+    }
+    .no-thanks a {
+      font-size: 12px;
+      color: #9A7A7A;
+      text-decoration: underline;
+      cursor: pointer;
+    }
+    .no-thanks p {
+      font-size: 11px;
+      color: #B09090;
+      margin-top: 6px;
+      line-height: 1.5;
+    }
+
+    /* ── GUARANTEE ── */
+    .guarantee {
+      display: flex; gap: 1rem; align-items: flex-start;
+      background: #FDF0F5;
+      border: 0.5px solid #E8C4D0;
+      border-radius: 12px;
+      padding: 1.25rem;
+      margin: 1rem 0;
+    }
+    .guarantee-badge {
+      width: 56px; height: 56px; flex-shrink: 0;
+      background: #8B2252; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Playfair Display', serif;
+      font-style: italic; font-weight: 700;
+      font-size: 9px; color: #fff;
+      text-align: center; line-height: 1.3;
+    }
+    .guarantee-text {
+      font-size: 13px;
+      line-height: 1.8;
+      color: #5C3D3D;
+    }
+    .guarantee-text strong { color: #2C1A1A; }
+
+    /* ── GIFT CALLOUT ── */
+    .gift-box {
+      background: #2C1A1A;
+      padding: 1.75rem 1.5rem;
+      text-align: center;
+    }
+    .gift-box h3 {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-weight: 700;
+      font-size: 20px;
+      color: #FFD6E7;
+      margin-bottom: 0.75rem;
+    }
+    .gift-box p {
+      font-size: 14px;
+      color: rgba(255,255,255,0.75);
+      line-height: 1.8;
+    }
+
+    @media (max-width: 480px) {
+      .wait-h1 { font-size: 22px; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="page">
+
+  <!-- ── TOP BAR ── -->
+  <div class="top-bar">
+    <span>Special One-Time Offer</span> — This page will not appear again
+  </div>
+
+  <!-- ── CONGRATS ── -->
+  <div class="congrats">
+    <div class="congrats-badge">Purchase Complete</div>
+    <p>Your Wifey Playbook is on its way to your inbox. 🌹<br>But before you go — we have something for you.</p>
+  </div>
+
+  <!-- ── WAIT HEADLINE ── -->
+  <div class="wait-block">
+    <div class="wait-label">Wait — One More Thing</div>
+    <h1 class="wait-h1">Everyone Prepared You for the Wedding.<br>Nobody Prepared You for the Marriage.</h1>
+    <p class="wait-sub">You just took the first step. Now take the complete one. 🌹</p>
+  </div>
+
+  <div class="oto-tag">One-Time Offer — This Price Disappears When You Leave This Page</div>
+
+  <!-- ── THE PITCH ── -->
+  <div class="section" style="text-align:center;">
+    <h2 class="h2">Introducing The New Wife Starter Kit.</h2>
+    <div class="divider"><span>✦</span></div>
+    <p class="body">You got the Playbook. Now get everything built for the most important chapter of her life — the marriage itself.</p>
+    <p class="body">Three beautifully designed digital pieces. One price. Available right now, right here, and nowhere else at this price.</p>
+  </div>
+
+  <!-- ── WHAT'S INCLUDED ── -->
+  <div class="section-rose">
+    <h2 class="h2">Here's Everything You Get.</h2>
+    <div class="divider"><span>✦</span></div>
+
+    <div class="kit-item">
+      <div class="kit-item-header">
+        <div class="kit-emoji">🌹</div>
+        <div>
+          <div class="kit-title">The Wifey Playbook</div>
+          <div class="kit-value">Value — $97</div>
+        </div>
+      </div>
+      <p class="kit-desc">The anchor piece. 182 pages covering 69 original recipes, relationship psychology, meal prep systems, game day hosting, sick day rituals, home resets, and The Wifey Glow. Already yours — included in the bundle at no extra charge.</p>
+    </div>
+
+    <div class="kit-item">
+      <div class="kit-item-header">
+        <div class="kit-emoji">📓</div>
+        <div>
+          <div class="kit-title">The "Before I Do" Bridal Prep Journal</div>
+          <div class="kit-value">Value — $47</div>
+        </div>
+      </div>
+      <p class="kit-desc">A printable PDF journal designed to walk her through the questions, intentions, and inner work of becoming a wife. Not just emotionally ready for the wedding — but fully prepared for the marriage. The guide for the woman who wants to walk in knowing exactly who she is and how she loves.</p>
+      <div class="highlight">The questions she should ask herself before she says I do. The clarity nobody else will give her. 🌹</div>
+    </div>
+
+    <div class="kit-item">
+      <div class="kit-item-header">
+        <div class="kit-emoji">📅</div>
+        <div>
+          <div class="kit-title">The First Year Ritual &amp; Habit Tracker</div>
+          <div class="kit-value">Value — $47</div>
+        </div>
+      </div>
+      <p class="kit-desc">A printable 12-month tracker for the first year of marriage. Daily rituals, weekly intentions, monthly check-ins. Built to keep her grounded, intentional, and high-effort through every season of that first beautiful year. The year that sets the tone for everything that follows.</p>
+      <div class="highlight">The first year is the foundation. This is how she builds it with intention. 🌹</div>
+    </div>
+  </div>
+
+  <!-- ── GIFT CALLOUT ── -->
+  <div class="gift-box">
+    <h3>💍 The Most Useful Bridal Gift She Will Ever Receive.</h3>
+    <p>Most bridal gifts are for the wedding day. This one is for the marriage. While everyone else is gifting champagne flutes and linen sets — you're giving her the thing she'll reach for on a Tuesday in month three when she's figuring out who she wants to be as a wife.</p>
+  </div>
+
+  <!-- ── VALUE TABLE ── -->
+  <div class="section">
+    <h2 class="h2">What It's Worth. What You Pay.</h2>
+    <div class="divider"><span>✦</span></div>
+    <table class="v-table">
+      <tr class="head"><td>What's Included</td><td>Value</td></tr>
+      <tr><td>The Wifey Playbook — 182 pages</td><td>$97</td></tr>
+      <tr><td>The "Before I Do" Bridal Prep Journal</td><td>$47</td></tr>
+      <tr><td>The First Year Ritual &amp; Habit Tracker</td><td>$47</td></tr>
+      <tr class="total"><td>Total Value</td><td>$191</td></tr>
+      <tr class="price"><td>Your One-Time Price Today</td><td>$97</td></tr>
+    </table>
+    <p class="body" style="font-size:13px; margin-top:0.5rem;">You already paid $27 for the Playbook. You're adding just $70 to complete the full kit.</p>
+
+    <div class="price-hero">
+      <p class="price-original">$191 value</p>
+      <div class="price-now">$97</div>
+      <p class="price-sub">One time. Instant delivery. Yours forever.</p>
+    </div>
+
+    <a href="YOUR_SAMCART_BUNDLE_LINK_HERE" class="btn-yes">
+      ✦ &nbsp; Yes — Add The New Wife Starter Kit for $97 &nbsp; ✦<br>
+      <span style="font-size:13px; font-weight:400; opacity:0.85;">Complete my kit now</span>
+    </a>
+    <p class="btn-yes-sub">Instant download • All three pieces delivered immediately • Free updates forever</p>
+
+    <div class="guarantee">
+      <div class="guarantee-badge">30<br>Day<br>Cover</div>
+      <p class="guarantee-text"><strong>Same guarantee. Zero risk.</strong> If you don't love every piece of this kit — reach out within 30 days for a full refund. No questions. No hoops. Every dollar back. 🌹</p>
+    </div>
+  </div>
+
+  <!-- ── CLOSING EMOTIONAL ── -->
+  <div class="section-rose" style="text-align:center;">
+    <h2 class="h2">She Deserves the Complete Kit. 🌹</h2>
+    <div class="divider"><span>✦</span></div>
+    <p class="body">The Playbook is her foundation. The Journal is her preparation. The Tracker is her first year.</p>
+    <p class="body">Three pieces. One woman. The most intentional beginning she could possibly give herself.</p>
+    <p class="body" style="font-family:'Playfair Display',serif; font-style:italic; color:#8B2252; font-weight:700;">High effort. Because she wants to. Because this chapter deserves it. 🌹</p>
+
+    <a href="YOUR_SAMCART_BUNDLE_LINK_HERE" class="btn-yes">
+      ✦ &nbsp; Add The New Wife Starter Kit — $97 &nbsp; ✦
+    </a>
+    <p class="btn-yes-sub">$191 value • Instant delivery • 30-day guarantee</p>
+  </div>
+
+  <!-- ── NO THANKS ── -->
+  <div class="no-thanks">
+    <a href="YOUR_THANK_YOU_PAGE_LINK_HERE">No thank you — I'll skip this offer and just keep the Playbook.</a>
+    <p>This offer is only available on this page. It will not be available at this price anywhere else.</p>
+  </div>
+
+</div>
+
+</body>
+</html>
